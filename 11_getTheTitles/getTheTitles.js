@@ -9,11 +9,7 @@ put those titles in a new array
 */
 
 const getTheTitles = function(books) {
-    const titles = [];
-    for (const book of books) {
-        titles.push(book['title']);
-    }
-    return titles;
+    return books.map((book) => book.title);
 };
 
 // Do not edit below this line
