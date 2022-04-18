@@ -38,6 +38,14 @@ const caesar = function(text, shifts) {
     const length = text.length;
     for (let letter of text) {
         const currAscii = letter.codePointAt();
+        const isLetter = (currAscii >= 65 && currAscii <= 90) ||
+                            (currAscii >= 97 && currAscii <= 122);
+
+        if(!isLetter) {
+            translated += letter;
+            continue;
+        }
+
         const isUpperCase = isUpper(currAscii);
         let newAscii = currAscii + shifts;
         
