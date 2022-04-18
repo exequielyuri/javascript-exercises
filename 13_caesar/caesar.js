@@ -9,7 +9,11 @@
         determine if its uppercase or lowercase
         get the ascii code
         add shifts
-            if it overflows, subtract 26
+            if it overflows,
+                if negative shift
+                    add 26
+                else
+                    subtract 26
         convert back to letter
         add that letter to translated
     return translated
@@ -25,13 +29,15 @@ function isUpper(ascii) {
 }
 
 function isOverflow(ascii, uppercase) {
-    return (ascii>122) || (uppercase && ascii>90); 
+    return (ascii>122) || (uppercase && ascii>90) ||
+            (ascii<65) || (!uppercase && ascii<97); 
 }
 
 const caesar = function(text, shifts) {
     let translated = "";
+    const isNegativeShift = shifts < 0;
 
-    if (shifts > 26) {
+    if (Math.abs(shifts) > 26) {
         shifts %= 26;
     }
 
@@ -50,7 +56,13 @@ const caesar = function(text, shifts) {
         let newAscii = currAscii + shifts;
         
         if (isOverflow(newAscii, isUpperCase)) {
-            newAscii -= 26;
+            if (isNegativeShift) {
+                newAscii += 26;
+            } else {
+                newAscii -= 26;
+            }
+
+            //(isNegativeShift) ? newAscii += 26 : newAscii -= 26;
         }
         let newLetter = String.fromCharCode(newAscii);
         translated += newLetter;
