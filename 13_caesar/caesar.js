@@ -56,13 +56,9 @@ const caesar = function(text, shifts) {
         let newAscii = currAscii + shifts;
         
         if (isOverflow(newAscii, isUpperCase)) {
-            if (isNegativeShift) {
-                newAscii += 26;
-            } else {
+            (isNegativeShift) ? 
+                newAscii += 26: 
                 newAscii -= 26;
-            }
-
-            //(isNegativeShift) ? newAscii += 26 : newAscii -= 26;
         }
         let newLetter = String.fromCharCode(newAscii);
         translated += newLetter;
